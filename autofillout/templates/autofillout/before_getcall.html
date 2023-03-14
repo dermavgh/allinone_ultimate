@@ -1,0 +1,23 @@
+{% extends "autofillout/base.html" %}
+
+{% block mainBody %}
+    <div class="segment2">
+        <h1>查無門診紀錄，是否檢查會診紀錄(≖＿≖)✧?</h1>
+    </div>
+    <form action="{% url "getcall_content" %}" method="POST">
+    {% csrf_token %}
+    <div class="segment2">
+        <label class="small">
+            <button class="unit" type="button" onclick="window.location.href='../chartno'"><i class="icon ion-md-arrow-back"></i></button>
+        </label>
+        <label>
+            <button class="red" type="submit"><i class="icon ion-md-send"></i>Yes</button>
+        </label>
+    </div>
+    </form>
+    {% if Error %}
+        <div class="segment3">
+            <h1 class="alert">查無會診!!(╬☉д⊙)</h1>
+        </div>
+    {% endif %}
+{% endblock mainBody %}

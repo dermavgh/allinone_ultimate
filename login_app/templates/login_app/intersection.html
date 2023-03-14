@@ -1,0 +1,28 @@
+{% extends "login_app/base.html" %}
+
+{% block mainBody %}
+
+    <form action="{% url "logout" %}" method="POST">
+    {% csrf_token %}
+    <div class="segment">
+        <h1>主選單</h1>
+    </div>
+    <div class="segment2">
+        <label class="long_button">
+            <button class = "black" type="button" onclick="window.location.href='/autofillout/chartno'"><i class="icon ion-md-fastforward"></i>自動填寫SUYT與切片本</button>
+        </label>
+        <label class="long_button">
+            <button class = "black" type="button" onclick="window.location.href='/rpts/'"><i class="icon ion-md-fastforward"></i>RPTS發初步報告</button>
+        </label>
+        <label class="long_button">
+            <button class = "black" type="button" onclick="window.location.href='/changeservice/'"><i class="icon ion-md-fastforward"></i>超級Change Service機器</button>
+        </label>
+    </div>
+    <div class="segment">
+        <label>
+            <button class="red" type="submit" name="out" value="True"><i class="icon ion-md-send"></i>Logout</button>
+        </label>
+    </div>
+</form>
+
+{% endblock %}

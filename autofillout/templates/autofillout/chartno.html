@@ -1,0 +1,38 @@
+{% extends "autofillout/base.html" %}
+
+{% block mainBody %}
+    <!-- 子內容-->
+    <form action="{% url "chartno" %}" method="POST" id="getChartNo">
+        {% csrf_token %}
+        <div class="segment2">
+            <h2>請輸入病歷號</h2>
+        </div>
+        <label class="full-width">
+            <input type="text" name="chartno" autofocus placeholder="Chart Number" value="{{ chartno }}"/>
+        </label>
+        <div class="segment2">
+            <label>
+                <button class="black" type="button" onclick="window.location.href='/intersection'"><i class="icon ion-md-list"></i>回主選單</button>
+{#                <button class="unit" type="reset"><i class="icon ion-md-refresh"></i></button>#}
+            </label>
+            <label>
+                <button class="red" type="submit"><i class="icon ion-md-send"></i>Submit</button>
+{#                <button class="unit" type="reset"><i class="icon ion-md-refresh"></i></button>#}
+            </label>
+
+        </div>
+
+    <!---  <div class="segment">
+            <button class="unit" type="button" onclick="window.location.href=''"><i class="icon ion-md-arrow-back"></i></button>
+        </div> -->
+
+    </form>
+    {% if Error %}
+        <div class="segment3">
+            <h1 class="alert">病歷號輸入錯誤!!專心!!(╬☉д⊙)</h1>
+        </div>
+    {% endif %}
+    {% block table %}
+    {% endblock table %}
+
+{% endblock mainBody %}

@@ -1,0 +1,131 @@
+{% extends "autofillout/base.html" %}
+
+{% block mainBody %}
+
+    <div id = "opmethod">
+        <div class="segment3">
+            <h2>術式選擇</h2>
+        </div>
+
+        <form action="{% url "opmethod" %}" method="POST" class ="op_form1" onsubmit="final.disabled = true">
+        {% csrf_token %}
+        <div class="flex_container">
+
+            <div class="flexbox1" id="table_holder">
+                <table class="container dash-border" id="op_method_table">
+                <thead>
+                     <tr>
+                        <th><h1>編號</h1></th>
+                        <th><h1>術式</h1></th>
+                         <th><h1>編號</h1></th>
+                        <th><h1>術式</h1></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="tag">A.</td>
+                        <td class="table-content">切除整個病灶（Excisional biopsy）</td>
+                        <td class="tag">F.</td>
+                        <td class="table-content">部分指甲移除 (Partial nail extraction)</td>
+                    </tr>
+                    <tr>
+                        <td class="tag">B.</td>
+                        <td class="table-content">切除部分病灶（Incisional biopsy）</td>
+                        <td class="tag">G.</td>
+                        <td class="table-content">指甲矯正 (Nail bracing)</td>
+                    </tr>
+                    <tr>
+                        <td class="tag">C.</td>
+                        <td class="table-content">Shave biopsy</td>
+                        <td class="tag">H.</td>
+                        <td class="table-content">電氣燒灼 (Electrocauterization)</td>
+                    </tr>
+                    <tr>
+                        <td class="tag">D.</td>
+                        <td class="table-content">Punch biopsy</td>
+                        <td class="tag">I.</td>
+                        <td class="table-content">TCA化學燒灼 (TCA chemical cauterization)</td>
+                    </tr>
+                    <tr>
+                        <td class="tag">E.</td>
+                        <td class="table-content">全指甲移除 (Total nail extraction)</td>
+                        <td class="tag">J.</td>
+                        <td class="table-content">冷凍治療 (Cryotherapy)</td>
+                    </tr>
+
+                </tbody>
+            </table>
+            </div>
+
+            <div class="flexbox2">
+                <div class="middle">
+                <div class="op_method">
+                    <table class="container2 dash-border">
+                        <tr>
+                            <td class="grey words">Tissue origin:</td>
+                            <td class="grey words_2nd">{{ tissue_origin_1 }}</td>
+                        </tr>
+                        <tr>
+                            <td class="grey words">Impression:</td>
+                            <td class="grey words_2nd" >{{ impression_1 }}</td>
+                        </tr>
+                    </table>
+                    <label class="margin-thin full-width">
+                    <input type="text" name="optype_1" autofocus id="optype_1" required placeholder="請輸入術式編號" />
+                    </label>
+                    <div class="segment4">
+                        <input type="checkbox" id="google1" name="google1" value="True" class="largerCheckbox"checked/>
+                        <label for="google1" class="little_label" id="google1">登錄Google表單</label>
+                    </div>
+                </div>
+                    {% if double %}
+                <div class="op_method">
+                    <table class="container2 dash-border">
+                        <tr>
+                            <td class="grey words">Tissue origin:</td>
+                            <td class="grey words_2nd">{{ tissue_origin_2 }}</td>
+                        </tr>
+                        <tr>
+                            <td class="grey words">Impression:</td>
+                            <td class="grey words_2nd" >{{ impression_2 }}</td>
+                        </tr>
+                    </table>
+                    <label class="margin-thin full-width">
+                    <input type="text" name="optype_2" id="optype_2" required placeholder="請輸入術式編號" />
+                    </label>
+                    <div class="segment4">
+                        <input type="checkbox" id="google2" name="google2" value="True" class="largerCheckbox" checked/>
+                        <label for="google2" class="little_label" id="google2">登錄Google表單 </label>
+                    </div>
+                </div>
+                </div>
+                    {% endif %}
+                <div class="segment3">
+                    <label class="small">
+                        <button class="unit" type="button" onclick="window.location.href='../chartno'"><i class="icon ion-md-arrow-back"></i></button>
+                    </label>
+                    <label>
+{#                <button class="small_blue" type="button"><i class="icon ion-md-swap"></i>Update</button>#}
+                    <button class="small_red" type="submit" name="final"><i class="icon ion-md-send"></i>Submit</button>
+                    </label>
+
+                </div>
+            </div>
+
+        </div>
+
+        </form>
+
+{#    <script>#}
+{#        const btn = document.getElementById("final")#}
+{#        function myFunction() {#}
+{#            btn.disabled = true;#}
+{#            setTimeout(()=>{#}
+{#                btn.disabled = false;#}
+{#                console.log('Button Activated')}, 5000)#}
+{#        }#}
+{#    </script>#}
+    </div>
+
+{% endblock mainBody %}
+

@@ -1,0 +1,72 @@
+{% extends "autofillout/base.html" %}
+
+{% block mainBody %}
+
+<div class="segment3">
+    <h2>表單填寫結果</h2>
+</div>
+<div>
+    <div id="form1">
+        <div class="segment5">
+            <h3 class="grey">[表單一] SUYT填寫<span style="color: #B8390E;">{{ final_result.0 }}</span>, Google病理單號: <span style="color: #B8390E;">{{ google_no1 }}</span></h3>
+        </div>
+        <table class="container dash-border">
+            <tbody>
+                <tr>
+                    <th class="grey no_shadow small-cell">病歷號</th>
+                    <td class="table-content no_shadow" >{{ chartno }}</td>
+                    <th class="grey no_shadow small-cell">姓名</th>
+                    <td class="table-content no_shadow">{{ name}}</td>
+                </tr>
+                <tr>
+                    <th class="grey no_shadow small-cell">REQ</th>
+                    <td class="table-content no_shadow" colspan="3">{{ REQ1 }}</td>
+                </tr>
+                <tr>
+                    <th class="grey no_shadow small-cell">Tissue origin</th>
+                    <td class="table-content no_shadow" colspan="3">{{ tissue_origin_1 }}</td>
+                </tr>
+                <tr>
+                    <th class="grey no_shadow small-cell">Impression</th>
+                    <td class="table-content no_shadow" colspan="3">{{ impression_1 }}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    {% if double %}
+    <div id="form2">
+        <div class="segment5">
+            <h3 class="grey">[表單二] SUYT填寫<span style="color: #B8390E;">{{ final_result.1 }}</span>, Google病理單號: <span style="color: #B8390E;">{{ google_no2 }}</span></h3>
+        </div>
+        <table class="container dash-border">
+            <tbody>
+                <tr>
+                    <th class="grey no_shadow small-cell">病歷號</th>
+                    <td class="table-content no_shadow" >{{ chartno }}</td>
+                    <th class="grey no_shadow small-cell">姓名</th>
+                    <td class="table-content no_shadow" >{{ name}}</td>
+                </tr>
+                <tr>
+                    <th class="grey no_shadow small-cell">REQ</th>
+                    <td class="table-content no_shadow" colspan="3">{{ REQ2 }}</td>
+                </tr>
+                <tr>
+                    <th class="grey no_shadow small-cell">Tissue origin</th>
+                    <td class="table-content no_shadow" colspan="3" >{{ tissue_origin_2 }}</td>
+                </tr>
+                <tr>
+                    <th class="grey no_shadow small-cell">Impression</th>
+                    <td class="table-content no_shadow" colspan="3">{{ impression_2 }}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    {% endif %}
+</div>
+<div class="segment3">
+    <label class="small">
+        <button class="unit" type="button" onclick="window.location.href='../chartno'"><i class="icon ion-md-arrow-back"></i></button>
+    </label>
+</div>
+
+{% endblock mainBody %}

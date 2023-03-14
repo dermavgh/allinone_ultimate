@@ -1,0 +1,110 @@
+{% extends "autofillout/base.html" %}
+
+{% block mainBody %}
+    <div id = "opinfo">
+   <div id="table_holder">
+        <table class="container dash-border" id="op_info">
+            <div class="segment2">
+                <h2>病理單資訊</h2>
+            </div>
+            <tbody>
+                <tr>
+                    <th><h1>病歷號</h1></th>
+                    <td class="table-content">{{ chartno }}</td>
+                    <th><h1>姓名</h1></th>
+                    <td class="table-content">{{ name}}</td>
+                </tr>
+                <tr>
+                    <th><h1>開單日期</h1></th>
+                    <td class="table-content">{{ patho_date }}</td>
+                    <th><h1>門診主治</h1></th>
+                    <td class="table-content">{{ VS }}</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <form action="{% url "opsheetinfo" %}" method="POST" class ="op_form">
+        {% csrf_token %}
+        <div class="op_name">
+            <input type="checkbox" id="op1" name="op1" value="True" class="largerCheckbox" checked />
+            <h3>I. {{ op_list1.0 }}</h3></div>
+
+        <div class="field-wrap">
+            <label>REQ: </label>
+            <input type="text" name="REQ1" id="REQ1" required value="{{ REQ1 }}"/>
+        </div>
+
+        <div class="field-wrap">
+            <label>Tissue origin: </label>
+            <input type="text" name="tissue_origin_1" id="tissue_origin_1" required value="{{ tissue_origin_1 }}"/>
+        </div>
+
+        <div class="field-wrap">
+            <label>Impression: </label>
+            <input type="text" name="impression_1" id="impression_1" required value="{{ impression_1 }}"/>
+        </div>
+
+        {% if double %}
+        <div class="op_name">
+            <input type="checkbox" id="op2" name="op2" value="True" class="largerCheckbox" checked />
+            <h3>II. {{ op_list2.0 }}</h3></div>
+
+        <div class="field-wrap">
+            <label>REQ: </label>
+            <button type="button" class="unit" name = 'swap' id="swap" style="color: midnightblue;"><i class="icon ion-md-swap"></i></button>
+            <input type="text" name="REQ2" id="REQ2" required value="{{ REQ2 }}"/>
+
+        </div>
+
+        <div class="field-wrap">
+            <label>Tissue origin: </label>
+            <input type="text" name="tissue_origin_2" id="tissue_origin_2" required value="{{ tissue_origin_2 }}"/>
+        </div>
+
+        <div class="field-wrap">
+            <label>Impression: </label>
+            <input type="text" name="impression_2" id="impression_2" required value="{{ impression_2 }}"/>
+        </div>
+
+        {% endif %}
+        <div class="segment3 tel">
+            <label class="full-width">
+            <input type="text" name="TEL" id="TEL" required autofocus placeholder="請輸入電話" value="{{ TEL }}" pattern="[0-9]{9-10}"/>
+            </label>
+        </div>
+
+        <div class="segment3">
+            <label class="small">
+                <button class="unit" type="button" onclick="window.location.href='../chartno'"><i class="icon ion-md-arrow-back"></i></button>
+            </label>
+            <label>
+                <button class="small_red" type="submit"><i class="icon ion-md-send"></i>Submit</button>
+            </label>
+        </div>
+
+        </form>
+
+        {% if op_error %}
+            <div class="segment3">
+                <h1 class="alert">請至少選擇一張病理單!!(╬☉д⊙)</h1>
+            </div>
+        {% endif %}
+
+    </div>
+        <script>
+            document.getElementById("swap").onclick = function() {swap()};
+            function swap(){
+                var REQ1 = document.getElementById('REQ1').value;
+                var REQ2 = document.getElementById('REQ2').value;
+                document.getElementById('REQ1').value = REQ2;
+                document.getElementById('REQ2').value = REQ1;
+            }
+        </script>
+    </div>
+    {% block opinfo_recheck %}
+    {% endblock opinfo_recheck %}
+    
+
+</form>
+
+{% endblock mainBody %}

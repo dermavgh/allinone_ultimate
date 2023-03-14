@@ -1,0 +1,79 @@
+{% extends "autofillout/call.html" %}
+
+{% block callinfo_recheck %}
+    <div id = "opinfo_recheck" class="segment2">
+       <div id="table_holder">
+        <table class="container dash-border" id="op_info_recheck">
+            <div>
+                <h2>最終確認</h2>
+            </div>
+            <tbody>
+                <tr>
+                    <th><h1>病歷號</h1></th>
+                    <td class="table-content">{{ chartno }}</td>
+                    <th><h1>姓名</h1></th>
+                    <td class="table-content">{{ name}}</td>
+                </tr>
+                <tr>
+                    <th><h1>電話</h1></th>
+                    <td class="table-content">{{ TEL }}</td>
+                    <th><h1>病理單數量</h1></th>
+                    <td class="table-content" id="pathonum">{{ double_str }}</td>
+                </tr>
+                <tr class="patho_info">
+                    <th colspan="4"><h1>病理單資料</h1></th>
+                </tr>
+                <tr>
+                    <th><h1>Tissue origin</h1></th>
+                    <td class="table-content" colspan="3">{{ tissue_origin_1 }}</td>
+                </tr>
+                <tr>
+                    <th><h1>Impression</h1></th>
+                    <td class="table-content" colspan="3">{{ impression_1 }}</td>
+                </tr>
+                {% if double %}
+                <tr>
+                    <th><h1>Tissue origin</h1></th>
+                    <td class="table-content" colspan="3">{{ tissue_origin_2 }}</td>
+                </tr>
+                <tr>
+                    <th><h1>Impression</h1></th>
+                    <td class="table-content" colspan="3">{{ impression_2 }}</td>
+                </tr>
+                {% endif %}
+
+            </tbody>
+        </table>
+       </div>
+        <form class ="op_form_recheck">
+        {% csrf_token %}
+        <div class="segment3">
+            <label>
+                <button class="small_blue" type="button" onclick="window.location.href='../call'"><i class="icon ion-md-swap"></i>Update</button>
+            </label>
+            <label>
+                <button class="small_red" id="submit" type="button"  onclick="window.location.href='../opmethod'"><i class="icon ion-md-send"></i>Submit</button>
+            </label>
+            <label class="small">
+                <button class="unit" type="button" onclick="window.location.href='../chartno'"><i class="icon ion-md-arrow-back"></i></button>
+            </label>
+        </div>
+        </form>
+        <br>
+        <br>
+    </div>
+    <script>
+        {#var element = document.getElementById("opinfo_recheck");#}
+        {#element.scrollIntoView({behavior: "smooth", block: "start", inline: "nearest"});#}
+
+        document.getElementById("submit").focus();
+
+        var input = document.getElementById("submit");
+        input.addEventListener("keypress", function (event){
+            if (event.key === "Enter"){
+                document.getElementById("submit").click();
+            }
+        });
+
+    </script>
+{% endblock callinfo_recheck %}

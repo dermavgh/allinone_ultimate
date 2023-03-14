@@ -1,0 +1,79 @@
+{% extends "changeservice/base.html" %}
+
+{% block mainBody %}
+	<div class="segment2">
+		<h1>Change Service</h1>
+	</div>
+	<form action="{% url "change" %}" method="POST">
+	{% csrf_token %}
+		<div class="flex_container">
+			<div class="flexbox1" >
+				<table class="container dash-border">
+					<thead>
+						<tr>
+							<th><input type="checkbox" class="patientcheck-all" checked><h1>全選</h1></th>
+							<th><h1>主治</h1></th>
+							<th><h1>房號</h1></th>
+							<th><h1>病歷號</h1></th>
+							<th><h1>姓名</h1></th>
+							<th><h1>性別</h1></th>
+							<th><h1>生日</h1></th>
+						</tr>
+					</thead>
+					<tbody>
+						{% for patient in patientlist %}
+						<tr>
+							<td><input type="checkbox" class="patientcheck" name="patients" value="{{patient.2}}" checked></td>
+							{% for info in patient %}
+							<td class="table-content">{{ info }}</td>
+							{% endfor %}
+						</tr>
+						{% endfor %}
+					</tbody>
+				</table>
+			</div>
+			<div  class="flexbox2">
+				<div class="segment2">
+					<h2>將Service轉給哪一位VS?</h2>
+				</div>
+				<div class="segment3">
+					<div class="flex_container2">
+						<label for="vs-select">Select a VS:</label>
+						<select id="vs-select" name="vs-select">
+							<option value="">-------------------------</option>
+							{% for vs in vs_list %}
+							<option value="{{ vs }}">{{ vs }}</option>
+							{% endfor %}
+						</select>
+					</div>
+				</div>
+				<br>
+				<div class="segment3">
+				<button class="small_red" type="submit"><i class="icon ion-md-send"></i>Submit</button>
+				</div>
+				{% if success %}
+        			<div class="segment3">
+            			<h2 class="alert">Change service 成功!</h2>
+        			</div>
+    			{% endif %}
+			</div>
+		</div>
+	</form>
+
+
+
+<script>
+  const patientCheckAll = document.querySelector('.patientcheck-all');
+  const patientChecks = document.querySelectorAll('.patientcheck');
+
+  patientCheckAll.addEventListener('change', function() {
+    for (let i = 0; i < patientChecks.length; i++) {
+      patientChecks[i].checked = this.checked;
+    }
+  });
+
+
+</script>
+
+
+{% endblock mainBody %}

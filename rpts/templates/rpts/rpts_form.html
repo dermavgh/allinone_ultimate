@@ -1,0 +1,33 @@
+{% extends "rpts/base.html" %}
+
+{% block mainBody %}
+
+        <form action="{% url "rpts_report" %}" method="POST">
+        {% csrf_token %}
+        <div class="segment2">
+            <h2>請輸入要發初步報告的病理單號</h2>
+        </div>
+        <label class="full-width">
+            <input type="text" name="start" autofocus placeholder="起始單號"/>
+        </label>
+        <label class="full-width">
+            <input type="text" name="end" placeholder="結束單號"/>
+        </label>
+        <div class="segment2">
+            <label>
+                <button class="black" type="button" onclick="window.location.href='/intersection'"><i class="icon ion-md-list"></i>回主選單</button>
+            </label>
+            <label>
+                <button class="red" type="submit"><i class="icon ion-md-send"></i>Submit</button>
+            </label>
+
+        </div>
+
+    </form>
+    {% if success %}
+        <div class="segment3">
+            <h1 class="alert">初步報告發送成功!</h1>
+        </div>
+    {% endif %}
+
+{% endblock mainBody %}

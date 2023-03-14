@@ -1,0 +1,118 @@
+{% extends "autofillout/base.html" %}
+
+{% block mainBody %}
+    <div class="segment2">
+        <h1>皮膚科會診紀錄</h1>
+    </div>
+    <div id="table_holder">
+        <table class="container dash-border" id="call_content">
+            <tbody>
+{#                <tr>#}
+{#                    <td class="table-content">{{ call_content.0 }}</td>#}
+{#                </tr>#}
+{#                <tr>#}
+{#                    <td class="table-content">{{ call_content.1 }}</td></td>#}
+{#                </tr>#}
+{#                <tr>#}
+{#                    <td class="table-content">{{ call_content.2 }}</td>#}
+{#                </tr>#}
+{#                <tr>#}
+{#                    <td class="table-content">{{ call_content.3 }}</td>#}
+{#                </tr>#}
+                {% autoescape off %}
+                    <tr>
+                    {{ call_content.0 }}
+                    </tr>
+                    <tr>
+                    {{ call_content.1 }}
+                    </tr>
+                    <tr>
+                    {{ call_content.2 }}
+                    </tr>
+                    <tr>
+                    {{ call_content.3 }}
+                    </tr>
+                {% endautoescape %}
+            </tbody>
+        </table>
+    </div>
+
+    <form action="{% url "call" %}" method="POST" class ="op_form">
+        {% csrf_token %}
+        <div class="segment2">
+            <input type="checkbox" id="MoreThenOne" name="MoreThenOne" value="True" class="largerCheckbox"  onclick="twopatho()"
+            {% if double %} checked {% endif %}/>
+            <label for="MoreThenOne" class="little_label" id="MoreThenOne">有兩張病理單</label>
+        </div>
+        <div id="first_form">
+            <div><h3>病理單I</h3></div>
+
+            <div class="field-wrap">
+                <label>Tissue origin: </label>
+                <input type="text" name="tissue_origin_1" id="tissue_origin_1" required value="{{ tissue_origin_1 }}"/>
+            </div>
+
+            <div class="field-wrap">
+                <label>Impression: </label>
+                <input type="text" name="impression_1" id="impression_1" required value="{{ impression_1 }}"/>
+            </div>
+        </div>
+
+        <div id="second_form" style="display:none">
+
+            <div><h3>病理單II</h3></div>
+
+            <div class="field-wrap">
+                <label>Tissue origin: </label>
+                <input type="text" name="tissue_origin_2" id="tissue_origin_2" value="{{ tissue_origin_2 }}"/>
+            </div>
+
+            <div class="field-wrap">
+                <label>Impression: </label>
+                <input type="text" name="impression_2" id="impression_2" value="{{ impression_2 }}"/>
+            </div>
+        </div>
+
+        <div class="segment3 tel">
+            <label class="full-width">
+            <input type="text" name="TEL" id="TEL" required placeholder="請輸入電話" value="{{ TEL }}"/>
+            </label>
+        </div>
+
+        <div class="segment3">
+            <label class="small">
+                <button class="unit" type="button" onclick="window.location.href='../chartno'"><i class="icon ion-md-arrow-back"></i></button>
+            </label>
+            <label>
+                <button class="small_red" type="submit"><i class="icon ion-md-send"></i>Submit</button>
+            </label>
+        </div>
+
+        </form>
+
+    {% block callinfo_recheck %}
+    {% endblock callinfo_recheck %}
+
+    <script>
+        var checkBox = document.getElementById("MoreThenOne");
+        var second_form = document.getElementById("second_form");
+            if (checkBox.checked === true){
+                second_form.style.display = "block";
+            } else {
+                second_form.style.display = "none";
+            };
+
+        function twopatho(){
+            var checkBox = document.getElementById("MoreThenOne");
+            var second_form = document.getElementById("second_form");
+
+            if (checkBox.checked == true){
+                second_form.style.display = "block";
+            } else {
+                second_form.style.display = "none";
+            }
+        }
+
+    </script>
+{% endblock mainBody %}
+

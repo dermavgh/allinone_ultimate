@@ -1,0 +1,68 @@
+{% extends "autofillout/chartno.html" %}
+
+{% block table %}
+    <div id="table_holder">
+    {% if opd %}
+        <table class="container dash-border" id="opdtable">
+            <div class="segment2">
+                <h2>近期皮膚科門診紀錄</h2>
+            </div>
+            <thead>
+                <tr>
+                    <th><h1>編號</h1></th>
+                    <th><h1>日期</h1></th>
+                    <th><h1>主治醫師</h1></th>
+                    <th><h1>門診科別</h1></th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for item in table %}
+                <tr class="table-content">
+                    <td>{{ item.0 }}</td>
+                    <td>{{ item.1 }}</td>
+                    <td>{{ item.2 }}</td>
+                    <td>{{ item.3 }}</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+
+        <form action="{% url "selectopd" %}" method="POST">
+        {% csrf_token %}
+{#        <div class="segment2">#}
+{#            <input type="checkbox" id="MoreThenOne" name="MoreThenOne" value="True" class="largerCheckbox" />#}
+{#            <label for="MoreThenOne" class="little_label" id="MoreThenOne">有兩張病理單</label>#}
+{#        </div>#}
+        <label class="full-width little_label" for="opdnumber" style="margin-bottom: 8px;">選擇門診編號: </label>
+        <input type="text" name="opdnumber" id="opdnumber" pattern="[n]|[N]|[0-5]|[0-5]" style='width: auto;' required value = '0'/>
+
+
+        <div class="segment2">
+            <label class="small">
+                <button class="unit" type="button" onclick="goBack()"><i class="icon ion-md-arrow-back"></i></button>
+{#                <button class="unit" type="reset"><i class="icon ion-md-refresh"></i></button>#}
+            </label>
+            <label>
+                <button class="red" type="submit"><i class="icon ion-md-send"></i>Submit</button>
+            </label>
+
+        </div>
+        </form>
+    {% endif %}
+    </div>
+
+    <script>
+        {#var element = document.getElementById("opdtable");#}
+        {#element.scrollIntoView({ block: "start", inline: "nearest",  behavior: 'smooth' });#}
+
+        document.getElementById("opdnumber").focus();
+
+        function goBack() {
+            var {{ opd }} = false;
+            var element = document.getElementById("getChartNo");
+            element.scrollIntoView({ block: "start", inline: "nearest",  behavior: 'smooth' });
+            document.getElementById("table_holder").innerHTML = "";
+        }
+    </script>
+
+{% endblock table %}

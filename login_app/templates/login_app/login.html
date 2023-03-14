@@ -1,0 +1,27 @@
+{% extends "login_app/base.html" %}
+
+{% block mainBody %}
+    <!-- 子內容-->
+<form action="{% url "login" %}" method="POST">
+    {% csrf_token %}
+    <div class="segment">
+        <h1>自動填寫SUYT與切片本</h1>
+    </div>
+    <label class="full-width">
+        <input type="text" name="ID" autofocus placeholder="ID"/>
+    </label>
+    <label class="full-width">
+        <input type="password" name = "PW" placeholder="Password"/>
+    </label>
+    <div class="segment2">
+        <label>
+            <button class="red" type="submit"><i class="icon ion-md-send"></i>Submit</button>
+        </label>
+    </div>
+</form>
+    {% if Error %}
+        <div class="segment3">
+            <h1 class="alert">帳號或密碼輸入錯誤!!專心!!(╬☉д⊙)</h1>
+        </div>
+    {% endif %}
+{% endblock mainBody %}
