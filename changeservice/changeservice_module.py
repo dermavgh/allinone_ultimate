@@ -250,7 +250,7 @@ def change_doc(session, cookieJar, selected_id, vs_id):
         # print(DRRNA, DRRID)
 
 
-        url_change = 'https://web9.vghtpe.gov.tw/VGHTRTE/TRTMNT/DB/updateDoctor.jsp'
+        url_change = 'https://web9.vghtpe.gov.tw/VGHTRTE/edit/dr.do'
         header_change = {
             'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/102.0.5005.63 Safari/537.36',
             'Host': 'web9.vghtpe.gov.tw',
