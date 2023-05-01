@@ -258,14 +258,17 @@ def change_doc(session, cookieJar, selected_id, vs_id):
         payload_change = {
             'DRVSID': VScode[find_VS_name(vs_id)],
             'DRVSNA': find_VS_name(vs_id),
-            'DRRID': "",
-            'DRRNA': "",
+            'DRVS2ID': '',
+            'DRVS2NA': '', 
+            'DRRID': '',
+            'DRRNA': '',
             'DRIID': '',
             'DRINA': '',
             'DRCID': '',
             'DRCNA': '',
             'NPID': '',
             'NPNA': '',
+            'onDRServiceFun': '0',
             'token': tkvalue}
 
         session.post(url_change, params=payload_change, headers=header_change, cookies=cookieJar)
