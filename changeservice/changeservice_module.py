@@ -235,19 +235,19 @@ def change_doc(session, cookieJar, selected_id, vs_id):
         tkvalue = soup.select('form input')[0].get('value')
 
 
-        # url_service = 'https://web9.vghtpe.gov.tw/VGHTRTE/TRTMNT/patientDiagnos.jsp'
-        # header_service = {
-        #     'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/102.0.5005.63 Safari/537.36',
-        #     'Host': 'web9.vghtpe.gov.tw',
-        # }
-        # payload_service = {
-        #     'token': tkvalue
-        # }
-        # r_service = session.post(url_service, headers=header_service, cookies=cookieJar, params=payload_service)
-        # soup = BeautifulSoup(r_service.text, features="html.parser")
-        # DRRNA = soup.find('input', {'id': 'DRRNA'})['value']
-        # DRRID = soup.find('input', {'id': 'DRRID'})['value']
-        # print(DRRNA, DRRID)
+        url_service = 'https://web9.vghtpe.gov.tw/VGHTRTE/TRTMNT/patientDiagnos.jsp'
+        header_service = {
+            'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/102.0.5005.63 Safari/537.36',
+            'Host': 'web9.vghtpe.gov.tw',
+        }
+        payload_service = {
+            'token': tkvalue
+        }
+        r_service = session.post(url_service, headers=header_service, cookies=cookieJar, params=payload_service)
+        soup = BeautifulSoup(r_service.text, features="html.parser")
+        DRRNA = soup.find('input', {'id': 'DRRNA'})['value']
+        DRRID = soup.find('input', {'id': 'DRRID'})['value']
+        print(DRRNA, DRRID)
 
 
         url_change = 'https://web9.vghtpe.gov.tw/VGHTRTE/edit/dr.do'
@@ -258,21 +258,24 @@ def change_doc(session, cookieJar, selected_id, vs_id):
         payload_change = {
             'DRVSID': VScode[find_VS_name(vs_id)],
             'DRVSNA': find_VS_name(vs_id),
-            'DRVS2ID': '',
-            'DRVS2NA': '', 
-            'DRRID': '',
-            'DRRNA': '',
+            'DRVS2ID': "",
+            'DRVS2NA': "",
+            'DRRID': DRRID,
+            'DRRNA': DRRNA,
             'DRIID': '',
             'DRINA': '',
             'DRCID': '',
             'DRCNA': '',
             'NPID': '',
             'NPNA': '',
-            'onDRServiceFun': '0',
+            'onDRServiceFun':'0',
             'token': tkvalue}
 
-        session.post(url_change, params=payload_change, headers=header_change, cookies=cookieJar)
-        print("病歷號" + id + "修改成功!")
+        r_change = session.post(url_change, params=payload_change, headers=header_change, cookies=cookieJar)
+        if "true" in BeautifulSoup(r_change.text, features="html.parser"):
+            print("病歷號" + id + "修改成功!")
+        else:
+            print("病歷號" + id + "修改失敗QAQ")
     return True
 
 
