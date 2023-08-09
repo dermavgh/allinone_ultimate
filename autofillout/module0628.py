@@ -884,8 +884,8 @@ def toGoogle(name, birthday, gender, ChartNo, tissue_origin, impression, TEL, ID
 
     gc = pygsheets.authorize(service_file='./credentials.json')
     sht = gc.open_by_url(
-        'https://docs.google.com/spreadsheets/d/1yIgn12m_AJ8cx2qZCLoOg6JjHdk7lQNNU4KkgpIxvw0/edit#gid=0')
-    wks = sht.worksheet_by_title('工作表1')
+        'https://docs.google.com/spreadsheets/d/1DqR1Lhlvk8rSBQG8Kx4VnPTHwScjZRAvIBOEgf7lMl8/edit#gid=0')
+    wks = sht.worksheet_by_title('2023切片本')
 
 
     date = datetime.now().strftime("%Y/%m/%d")
