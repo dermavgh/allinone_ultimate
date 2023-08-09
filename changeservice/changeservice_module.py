@@ -44,7 +44,8 @@ VScode={
     '陳長齡' : 'DOC4723G',
     '李定達' : 'DOC4741L',
     '李政源' : 'DOC4703A',
-    '何翊芯' : 'DOC4789J'}
+    '何翊芯' : 'DOC4789J',
+    '張綜顯' : 'DOC4715F'}
 
 
 def find_VS_name(id_num):
